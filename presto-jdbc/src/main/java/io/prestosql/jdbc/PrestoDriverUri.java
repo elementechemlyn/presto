@@ -394,7 +394,8 @@ final class PrestoDriverUri
     {
         for (String propertyName : connectionProperties.stringPropertyNames()) {
             if (ConnectionProperties.forKey(propertyName) == null) {
-                throw new SQLException(format("Unrecognized connection property '%s'", propertyName));
+                //TODO - A Maven filter could probably handle disabling this better?
+                //throw new SQLException(format("Unrecognized connection property '%s'", propertyName));
             }
         }
 
