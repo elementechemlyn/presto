@@ -45,7 +45,9 @@ public class PrestoDriver
     private final OkHttpClient httpClient = newHttpClient();
 
     static {
-        String implementationVersion = PrestoDriver.class.getPackage().getImplementationVersion();
+        Package thePackage = PrestoDriver.class.getPackage();
+        String implementationVersion = thePackage == null ? null : thePackage.getImplementationVersion();
+        //String implementationVersion = null; //PrestoDriver.class.getPackage().getImplementationVersion();
         DRIVER_VERSION = implementationVersion == null ? "unknown" : implementationVersion;
         Matcher matcher = Pattern.compile("^(\\d+)(\\.(\\d+))?($|[.-])").matcher(DRIVER_VERSION);
         if (!matcher.find()) {

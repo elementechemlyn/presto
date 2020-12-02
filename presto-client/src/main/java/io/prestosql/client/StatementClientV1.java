@@ -91,9 +91,11 @@ class StatementClientV1
     private static final JsonCodec<QueryResults> QUERY_RESULTS_CODEC = jsonCodec(QueryResults.class);
 
     private static final Splitter SESSION_HEADER_SPLITTER = Splitter.on('=').limit(2).trimResults();
+    private static final String DRIVER_VERSION = StatementClientV1.class.getPackage() == null ? null :
+            StatementClientV1.class.getPackage().getImplementationVersion();
     private static final String USER_AGENT_VALUE = StatementClientV1.class.getSimpleName() +
             "/" +
-            firstNonNull(StatementClientV1.class.getPackage().getImplementationVersion(), "unknown");
+            firstNonNull(DRIVER_VERSION, "unknown");
 
     private final OkHttpClient httpClient;
     private final String query;
